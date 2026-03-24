@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Space Wave</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui-layer">
+            <div id="stats">
+                <div class="stat-box">WAVE <span id="wave-val">1</span></div>
+                <div class="stat-box">SCORE <span id="score-val">0</span></div>
+                <div class="stat-box">LIVES <span id="lives-val">3</span></div>
+            </div>
+
+            <div id="menu-overlay" class="overlay">
+                <h1 class="neon-text">NEON WAVE</h1>
+                <p>Navigate the zigzag void. Precision is survival.</p>
+                <div class="controls-hint">
+                    <span><b>HOLD SPACE</b> or <b>LEFT CLICK</b> to Go Up</span>
+                    <span><b>RELEASE</b> to Go Down</span>
+                </div>
+                <button id="start-btn" class="neon-button">INITIATE FLOW</button>
+            </div>
+
+            <div id="game-over-overlay" class="overlay hidden">
+                <h1 class="neon-text danger">MISSION FAILED</h1>
+                <p>Your ship was consumed by the void.</p>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <button id="restart-btn" class="neon-button">RETRY MISSION</button>
+            </div>
+
+            <div id="controls-panel">
+                <div class="control-group">
+                    <label for="player-color-picker">SHIP COLOR</label>
+                    <input type="color" id="player-color-picker" value="#00f3ff">
+                </div>
+                <div class="control-group">
+                    <label class="switch">
+                        <input type="checkbox" id="inf-lives-toggle">
+                        <span class="slider-toggle"></span>
+                    </label>
+                    <span class="toggle-label">INF LIVES</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
