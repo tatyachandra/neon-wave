@@ -103,8 +103,8 @@ class PathSegment {
     constructor(x) {
         this.x = x;
         this.width = 10;
-        this.top = 100 + Math.random() * 100;
-        this.bottom = 100 + Math.random() * 100;
+        this.top = 150 + Math.random() * 100;
+        this.bottom = 150 + Math.random() * 100;
         this.gap = CANVAS_HEIGHT - this.top - this.bottom;
     }
 
@@ -193,11 +193,11 @@ function updatePath() {
         const newSeg = new PathSegment(lastSeg.x + lastSeg.width);
         
         // Smooth transitions
-        newSeg.top = lastSeg.top + (Math.random() - 0.5) * 20;
-        newSeg.top = Math.max(50, Math.min(CANVAS_HEIGHT - 150, newSeg.top));
+        newSeg.top = lastSeg.top + (Math.random() - 0.5) * 30;
+        newSeg.top = Math.max(100, Math.min(CANVAS_HEIGHT - 250, newSeg.top));
         
-        newSeg.bottom = lastSeg.bottom + (Math.random() - 0.5) * 20;
-        newSeg.bottom = Math.max(50, Math.min(CANVAS_HEIGHT - 150, newSeg.bottom));
+        newSeg.bottom = lastSeg.bottom + (Math.random() - 0.5) * 30;
+        newSeg.bottom = Math.max(100, Math.min(CANVAS_HEIGHT - 250, newSeg.bottom));
         
         path.push(newSeg);
     }
