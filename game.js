@@ -18,8 +18,8 @@ const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
 const PLAYER_X = 150;
 const PLAYER_SIZE = 24;
-const FORWARD_SPEED = 5;
-const VERTICAL_SPEED = 6;
+const FORWARD_SPEED = 7;
+const VERTICAL_SPEED = 8;
 
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
@@ -32,6 +32,7 @@ let lives = 3;
 let infiniteLives = false;
 let player;
 let path = [];
+let trail = []; // Array of {x, y} points
 let particles = [];
 let isHolding = false;
 
@@ -166,6 +167,7 @@ class Particle {
 function init() {
     player = new WavePlayer();
     path = [];
+    trail = [];
     particles = [];
     distance = 0;
     
@@ -177,6 +179,13 @@ function init() {
 
 function updatePath() {
     path.forEach(seg => seg.x -= FORWARD_SPEED);
+    trail.forEach(pt => pt.x -= FORWARD_SPEED);
+    
+    // Limit trail length
+    if (trail.length > 500) trail.shift();
+    
+    // Add current player position to trail
+    trail.push({x: player.x, y: player.y});
     
     // Add new segment
     if (path[path.length - 1].x < CANVAS_WIDTH) {
@@ -306,6 +315,24 @@ function draw() {
     }
 
     path.forEach(seg => seg.draw());
+    
+    // Draw trail
+    if (trail.length > 1) {
+        ctx.save();
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = player.color;
+        ctx.strokeStyle = player.color;
+        ctx.lineWidth = 4;
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        ctx.moveTo(trail[0].x, trail[0].y);
+        for (let i = 1; i < trail.length; i++) {
+            ctx.lineTo(trail[i].x, trail[i].y);
+        }
+        ctx.stroke();
+        ctx.restore();
+    }
+
     particles.forEach(p => p.draw());
     
     if (gameState === 'PLAYING') {
